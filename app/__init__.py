@@ -1,5 +1,6 @@
 from flask import Flask
 from flask import render_template
+from flask import redirect
 from random import randint
 
 # Create the app
@@ -16,5 +17,22 @@ def about():
 
 @app.get("/random/")
 def random():
-    randNum = randint(1, 1000)
+    randNum = randint(1, 1000000000000000000000000000000000000000000000000000000000000000)
     return render_template('pages/random.jinja', number=randNum)
+
+@app.get("/number/<int:num>")
+def analyseNumber(num):
+    print(f"You entered: {num}")
+    return render_template('pages/number.jinja', number=num)
+
+@app.get("/form/")
+def form():
+    return render_template("pages/form.jinja")
+
+
+
+
+@app.errorhandler(404)
+def notFound(e):
+    return render_template("pages/404.jinja")
+
